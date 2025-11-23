@@ -1,4 +1,0 @@
-C:\Project\SortFiles\SortFiles\obj\Debug\net8.0-windows\MainWindow.g.cs
-C:\Project\SortFiles\SortFiles\obj\Debug\net8.0-windows\App.g.cs
-C:\Project\SortFiles\SortFiles\obj\Debug\net8.0-windows\SortFiles_MarkupCompile.cache
-C:\Project\SortFiles\SortFiles\obj\Debug\net8.0-windows\SortFiles_MarkupCompile.lref

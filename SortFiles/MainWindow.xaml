@@ -1,12 +1,53 @@
-﻿<Window x:Class="SortFiles.MainWindow"
+<Window x:Class="SortFiles.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SortFiles"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="SortFiles" Height="480" Width="880">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Vertical" Margin="0,0,0,8">
+            <TextBlock Text="Исходная папка" FontWeight="Bold"/>
+            <DockPanel Margin="0,4,0,0">
+                <TextBox x:Name="SourcePathBox" MinWidth="320" VerticalAlignment="Center" />
+                <Button Content="Обзор..." Click="OnBrowseSource" Margin="8,0,0,0" />
+            </DockPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,8">
+            <TextBlock Text="Папка назначения" FontWeight="Bold"/>
+            <DockPanel Margin="0,4,0,0">
+                <TextBox x:Name="DestinationPathBox" MinWidth="320" VerticalAlignment="Center" />
+                <Button Content="Обзор..." Click="OnBrowseDestination" Margin="8,0,0,0" />
+            </DockPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" Margin="0,0,0,8">
+            <Button Content="Сканировать" Click="OnScan" Width="140" />
+            <Button Content="Копировать выбранные" Click="OnCopySelected" Width="200" Margin="8,0,0,0"/>
+            <TextBlock x:Name="StatusText" Margin="12,0,0,0" VerticalAlignment="Center" Text="Готово" />
+        </StackPanel>
+
+        <DataGrid Grid.Row="3"
+                  x:Name="FileTypesGrid"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  HeadersVisibility="Column"
+                  ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding IsSelected}" Header="Выбрать" Width="80"/>
+                <DataGridTextColumn Binding="{Binding DisplayName}" Header="Тип" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Extension}" Header="Расширение" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Count}" Header="Количество" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

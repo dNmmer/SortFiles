@@ -1,0 +1,22 @@
+# Build
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS
+.vs/
+
+# Resharper / Rider
+_ReSharper*/
+*.DotSettings.user
+.idea/
+
+# other
+*/bin/
+*/obj/
+*.dbmdl
+*.opendb
+*.jfm
