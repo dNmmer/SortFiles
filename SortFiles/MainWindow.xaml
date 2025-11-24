@@ -5,7 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SortFiles"
         mc:Ignorable="d"
-        Title="SortFiles" Height="480" Width="880">
+        Title="SortFiles" Height="480" Width="880"
+        Background="{DynamicResource WindowBackgroundBrush}">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="4"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource DataGridForegroundBrush}"/>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,18 +55,34 @@
 
         <StackPanel Orientation="Vertical" Margin="0,0,0,8">
             <TextBlock Text="Исходная папка" FontWeight="Bold"/>
-            <DockPanel Margin="0,4,0,0">
-                <TextBox x:Name="SourcePathBox" MinWidth="320" VerticalAlignment="Center" />
-                <Button Content="Обзор..." Click="OnBrowseSource" Margin="8,0,0,0" />
-            </DockPanel>
+            <Grid Margin="0,4,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="SourcePathBox" Grid.Column="0" VerticalAlignment="Center" />
+                <Button Grid.Column="1"
+                        Content="   Обзор...   "
+                        Width="120"
+                        Click="OnBrowseSource"
+                        Margin="8,0,0,0" />
+            </Grid>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,8">
             <TextBlock Text="Папка назначения" FontWeight="Bold"/>
-            <DockPanel Margin="0,4,0,0">
-                <TextBox x:Name="DestinationPathBox" MinWidth="320" VerticalAlignment="Center" />
-                <Button Content="Обзор..." Click="OnBrowseDestination" Margin="8,0,0,0" />
-            </DockPanel>
+            <Grid Margin="0,4,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="DestinationPathBox" Grid.Column="0" VerticalAlignment="Center" />
+                <Button Grid.Column="1"
+                        Content="   Обзор...   "
+                        Width="120"
+                        Click="OnBrowseDestination"
+                        Margin="8,0,0,0" />
+            </Grid>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" Margin="0,0,0,8">

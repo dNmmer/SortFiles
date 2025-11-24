@@ -1,0 +1,81 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF3F3F3"/>
+    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#FFF5F5F5"/>
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="#FF111111"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#FFE0E0E0"/>
+    <SolidColorBrush x:Key="ButtonBorderBrush" Color="#FFB6B6B6"/>
+    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="#FF111111"/>
+    <SolidColorBrush x:Key="ButtonBackgroundHoverBrush" Color="#FFEBEBEB"/>
+    <SolidColorBrush x:Key="ButtonBackgroundPressedBrush" Color="#FFD5D5D5"/>
+    <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="DataGridForegroundBrush" Color="#FF111111"/>
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundBrush" Color="#FFF0F0F0"/>
+    <SolidColorBrush x:Key="DataGridHeaderForegroundBrush" Color="#FF111111"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#FFC4C4C4"/>
+
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}"/>
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}"/>
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="4"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundHoverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressedBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="DataGrid">
+        <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DataGridForegroundBrush}"/>
+        <Setter Property="GridLinesVisibility" Value="None"/>
+        <Setter Property="RowBackground" Value="#FFF9F9F9"/>
+        <Setter Property="AlternatingRowBackground" Value="#FFF0F0F0"/>
+    </Style>
+
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    </Style>
+</ResourceDictionary>

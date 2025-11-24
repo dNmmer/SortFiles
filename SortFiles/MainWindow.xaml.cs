@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Interop;
 
 namespace SortFiles;
 
@@ -48,11 +50,49 @@ public partial class MainWindow : Window
         [".7z"] = "Архив 7z"
     };
 
+    private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
     public MainWindow()
     {
         InitializeComponent();
         FileTypesGrid.DataContext = _items;
+        App.ThemeChanged += OnThemeChanged;
     }
+
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+        UpdateTitleBarTheme();
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        App.ThemeChanged -= OnThemeChanged;
+        base.OnClosed(e);
+    }
+
+    private void OnThemeChanged()
+    {
+        Dispatcher.Invoke(UpdateTitleBarTheme);
+    }
+
+    private void UpdateTitleBarTheme()
+    {
+        try
+        {
+            var hwnd = new WindowInteropHelper(this).Handle;
+            if (hwnd == IntPtr.Zero) return;
+            int useDark = App.IsLightTheme ? 0 : 1;
+            DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDark, sizeof(int));
+        }
+        catch
+        {
+            // ignore if not supported
+        }
+    }
+
+    [DllImport("dwmapi.dll")]
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
     private void OnBrowseSource(object sender, RoutedEventArgs e)
     {
